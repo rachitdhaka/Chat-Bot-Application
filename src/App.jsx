@@ -85,12 +85,12 @@ function App() {
   }
   
   return (
-   <div className="bg-gradient-to-br from-blue-50 to-indigo-100 h-screen flex justify-center items-center p-4">
+   <div className="bg-white h-screen flex justify-center items-center p-4">
       {/* main section */}
       <div className="bg-white shadow-2xl h-full max-w-4xl w-full text-black py-6 px-4 rounded-2xl flex flex-col justify-between">
           
           {/* Header */}
-          <div className="text-center py-4 border-b border-gray-200">
+          <div className="text-center py-2 border-b border-gray-200">
             <h1 className="text-2xl font-bold text-gray-800">AI Chat Assistant</h1>
             <p className="text-gray-600 text-sm">Powered by Google Gemini</p>
           </div>
@@ -101,9 +101,7 @@ function App() {
             className="flex flex-col gap-4 overflow-y-auto flex-1 py-4 scroll-smooth"
           >
             {chatHistory.length === 0 && (
-              <div className="text-center text-gray-500 mt-20">
-                <div className="text-6xl mb-4">🤖</div>
-                <h2 className="text-xl font-semibold mb-2">Welcome to AI Chat!</h2>
+              <div className="text-center text-gray-500 mt-10">
                 <p>Start a conversation by typing a message below.</p>
               </div>
             )}
