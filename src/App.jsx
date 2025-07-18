@@ -1,16 +1,24 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import axios from "axios";
 
 function App() {
   const [chatHistory, SetChatHistory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef();
+  const chatContainerRef = useRef();
 
   // Gemini API configuration
   const API_KEY = "AIzaSyB-ZvX-1AhUDHEmK_mZzmsaXR65XXduTLc";
   const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${API_KEY}`;
   
   console.log('Gemini API configured with key:', API_KEY ? 'Present' : 'Missing');
+
+  // Auto-scroll to bottom when chat history or loading state changes
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [chatHistory, isLoading]);
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
@@ -88,7 +96,10 @@ function App() {
           </div>
 
           {/* chat content area */}
-          <div className="flex flex-col gap-4 overflow-y-auto flex-1 py-4">
+          <div 
+            ref={chatContainerRef}
+            className="flex flex-col gap-4 overflow-y-auto flex-1 py-4 scroll-smooth"
+          >
             {chatHistory.length === 0 && (
               <div className="text-center text-gray-500 mt-20">
                 <div className="text-6xl mb-4">🤖</div>
